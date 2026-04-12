@@ -1,0 +1,28 @@
+"""
+Settings module for AlienInvasion_milzyb14.
+Author: Myles Buchanan
+Purpose: Stores all settings for the Alien Invasion game.
+Starter code from: https://github.com/RedBeard41/alien_Invasion_starter.git
+Date: 04/12/2026
+"""
+
+class Settings:
+    """A class to store all settings for Alien Invasion."""
+
+    def __init__(self):
+        """Initialize the game's settings."""
+        # Screen settings
+        self.screen_width = 1200
+        self.screen_height = 800
+
+        # Ship settings
+        self.ship_speed = 5
+
+        # Bullet settings
+        self.bullet_speed = 7
+        self.bullets_allowed = 5
+
+        # Alien settings
+        self.alien_speed = 1
+        self.fleet_drop_speed = 10
+        self.fleet_direction = 1
