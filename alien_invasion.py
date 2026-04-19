@@ -127,15 +127,19 @@ class AlienInvasion:
             if i != 0:
                 self._create_alien(center_x, center_y + (i * spacing))
 
+    def _create_alien(self, x, y):
+        """Create an alien and place it in the fleet."""
+        new_alien = Alien(self, x, y)
+        self.aliens.add(new_alien)
+
     def _update_screen(self):
         """Update images on the screen and flip to the new screen."""
         self.screen.blit(self.background, (0, 0))
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
         pygame.display.flip()
-
-    
 
 if __name__ == '__main__':
     ai = AlienInvasion()
