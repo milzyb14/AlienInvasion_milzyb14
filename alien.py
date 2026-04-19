@@ -1,30 +1,34 @@
-import pygame 
-from pygame.sprite import Sprite
+"""Alien module for AlienInvasion_milzyb14.
+Author: Myles Buchanan
+Purpose: Manages individual alien sprites using a custom alien image.
+Starter code from: https://github.com/RedBeard41/alien_Invasion_starter.git
+Date: 04/19/2026
+"""
 
-class Alien(Sprite):
+
+import pygame
+from pathlib import Path
+
+class Alien(pygame.sprite.Sprite):
     """A class to represent a single alien in the fleet."""
 
-    def __init__(self, ai_game):
+    def __init__(self, ai_game, x, y):
         """Initialize the alien and set its starting position."""
         super().__init__()
         self.screen = ai_game.screen
-        self.settings = ai_game.settings 
-        
-        # Load the alien image and set its rect attribute.
-        alien_path = Path('Assets/images/alien.bmp')
+        self.settings = ai_game.settings
+
+        alien_path = Path('Assets/images/alien.png')
         self.image = pygame.image.load(alien_path)
         self.rect = self.image.get_rect()
 
-        # Start each new alien near the top left of the screen.
         self.rect.x = x
         self.rect.y = y
 
-        # Store the alien's exact horizontal position.
-    
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
     def update(self):
-        """Move the alien right or left."""
-        self.y += self.settings.alien.speed
+        """Move the alien down the screen."""
+        self.y += self.settings.alien_speed
         self.rect.y = self.y
