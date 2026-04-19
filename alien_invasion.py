@@ -112,7 +112,20 @@ class AlienInvasion:
         self.ship.rect.midbottom = self.screen.get_rect().midbottom
         self.ship.x = float(self.ship.rect.x)
 
-    
+    def _create_fleet(self):
+        """Create a custom cross shaped fleet of aliens."""
+        center_x = self.settings.screen_width // 2
+        center_y = 150 
+        spacing = 70
+
+        # Horizonatal arm of the cross (5 aliens) 
+        for i in range(-2, 3):
+            self._create_alien(center_x + (i * spacing), center_y)
+
+        # Vertical arm of the cross (4 aliens, skip center - already placed)
+        for i in range(-2, 3):
+            if i != 0:
+                self._create_alien(center_x, center_y + (i * spacing))
 
     def _update_screen(self):
         """Update images on the screen and flip to the new screen."""
