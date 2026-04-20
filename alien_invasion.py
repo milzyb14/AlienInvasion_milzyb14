@@ -12,6 +12,7 @@ from pathlib import Path
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
@@ -27,6 +28,8 @@ class AlienInvasion:
         ))
         pygame.display.set_caption("Alien Invasion")
 
+        self.ship = Ship(ai_game=self)
+
         # Load background image
         bg_path = Path('Assets/images/background.png')
         self.background = pygame.image.load(bg_path)
@@ -37,6 +40,9 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -45,6 +51,8 @@ class AlienInvasion:
             self.ship.update()
             self._update_bullets()
             self._update_screen()
+            self._update_aliens()
+
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
@@ -78,6 +86,52 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+        self._check_bullet_alien_collisions()
+
+    def _check_bullet_alien_collisions(self):
+        """Respond to bullet alien collisions."""
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True
+        )
+        # If all aliens gone, respwan the fleet. 
+        if not self.aliens:
+            self.bullets.empty()
+            self._create_fleet()
+
+    def _update_aliens(self):
+        """Update positions of all aliens and check ship collisions."""
+        self.aliens.update()
+        # Check alien ship collisions
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            self._ship_hit()
+
+    def _ship_hit(self):
+        """Respond to the ship being hit by an alien."""
+        self.aliens.empty()
+        self.bullets.empty()
+        self._create_fleet()
+        self.ship.rect.midbottom = self.screen.get_rect().midbottom
+        self.ship.x = float(self.ship.rect.x)
+
+    def _create_fleet(self):
+        """Create a custom cross shaped fleet of aliens."""
+        center_x = self.settings.screen_width // 2
+        center_y = 150 
+        spacing = 70
+
+        # Horizonatal arm of the cross (5 aliens) 
+        for i in range(-2, 3):
+            self._create_alien(center_x + (i * spacing), center_y)
+
+        # Vertical arm of the cross (4 aliens, skip center - already placed)
+        for i in range(-2, 3):
+            if i != 0:
+                self._create_alien(center_x, center_y + (i * spacing))
+
+    def _create_alien(self, x, y):
+        """Create an alien and place it in the fleet."""
+        new_alien = Alien(self, x, y)
+        self.aliens.add(new_alien)
 
     def _update_screen(self):
         """Update images on the screen and flip to the new screen."""
@@ -85,6 +139,7 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
         pygame.display.flip()
 
 if __name__ == '__main__':
