@@ -17,17 +17,14 @@ from button import Button
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
-
     def __init__(self):
         """Initialize the game and create game resources."""
         pygame.init()
         # Start Alien Invasion in an inactive state. 
         self.game_active = False
-
         # Make play button.
         self.play_button = Button(self, "Play")
         self.settings = Settings()
-
         self.screen = pygame.display.set_mode((
             self.settings.screen_width,
             self.settings.screen_height
@@ -35,7 +32,6 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(ai_game=self)
-
         # Load background image
         bg_path = Path('Assets/images/background.png')
         self.background = pygame.image.load(bg_path)
@@ -43,11 +39,9 @@ class AlienInvasion:
             self.background,
             (self.settings.screen_width, self.settings.screen_height)
         )
-
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
-
         self._create_fleet()
 
     def run_game(self):
@@ -65,6 +59,9 @@ class AlienInvasion:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
                     self.ship.moving_right = True
@@ -79,6 +76,11 @@ class AlienInvasion:
                     self.ship.moving_right = False
                 elif event.key == pygame.K_LEFT:
                     self.ship.moving_left = False
+
+    def _check_play_button(self, mouse_pos):
+        """Start a new game when the player clicks Play."""
+        if self.play_button.rect.collidepoint(mouse_pos):
+            self.game_active = True
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
