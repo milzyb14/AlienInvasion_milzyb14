@@ -91,6 +91,8 @@ class AlienInvasion:
             # Create a new fleet and center the ship.
             self._create_fleet()
             self.ship.center_ship()
+            # Hide the mouse cursor.
+            pygame.mouse.set_visible(False)
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
@@ -130,6 +132,7 @@ class AlienInvasion:
         self._create_fleet()
         self.ship.rect.midbottom = self.screen.get_rect().midbottom
         self.ship.x = float(self.ship.rect.x)
+        pygame.mouse.set_visible(True)
 
     def _create_fleet(self):
         """Create a custom cross shaped fleet of aliens."""
