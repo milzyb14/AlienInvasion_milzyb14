@@ -115,8 +115,10 @@ class AlienInvasion:
         )
         # If all aliens gone, respwan the fleet. 
         if not self.aliens:
+        # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _update_aliens(self):
         """Update positions of all aliens and check ship collisions."""
