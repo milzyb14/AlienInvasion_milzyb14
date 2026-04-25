@@ -62,7 +62,6 @@ class AlienInvasion:
             self._update_screen()
             self.clock.tick(60)
             
-
     def _check_events(self):
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
