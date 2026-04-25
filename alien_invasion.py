@@ -50,15 +50,18 @@ class AlienInvasion:
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
-
+        
     def run_game(self):
         """Start the main loop for the game."""
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
+            if self.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
             self._update_screen()
-            self._update_aliens()
+            self.clock.tick(60)
+            
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
