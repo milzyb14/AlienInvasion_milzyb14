@@ -7,13 +7,17 @@ Date: 04/12/2026
 """
 
 import sys
+from time import sleep
+
 import pygame
 from pathlib import Path
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from button import Button
+
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
@@ -30,6 +34,9 @@ class AlienInvasion:
             self.settings.screen_height
         ))
         pygame.display.set_caption("Alien Invasion")
+
+        # Create an instance to store game statistics.
+        self.stats = GameStats(self)
 
         self.ship = Ship(ai_game=self)
         # Load background image
@@ -52,7 +59,6 @@ class AlienInvasion:
             self._update_bullets()
             self._update_screen()
             self._update_aliens()
-
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
@@ -130,12 +136,18 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """Respond to the ship being hit by an alien."""
+        # Decrement ships left.
+        self.stats.ships_left -= 1
+        # Get rid of any remaining aliens and bullets.
         self.aliens.empty()
         self.bullets.empty()
+        # Create a new fleet and center the ship.
         self._create_fleet()
         self.ship.rect.midbottom = self.screen.get_rect().midbottom
         self.ship.x = float(self.ship.rect.x)
         pygame.mouse.set_visible(True)
+        # Pasue.
+        sleep(0.5)
 
     def _create_fleet(self):
         """Create a custom cross shaped fleet of aliens."""
