@@ -14,6 +14,7 @@ class Settings:
         # Screen settings
         self.screen_width = 1200
         self.screen_height = 800
+        self.bg_color = (0,0, 0)
 
         # Ship settings
         self.ship_speed = 5
@@ -30,6 +31,7 @@ class Settings:
 
         # How quickly the game speeds up. 
         self.speedup_scale = 1.1
+
         # How quickly the alien point values increase.
         self.score_scale = 1.5
 
