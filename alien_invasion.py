@@ -25,23 +25,20 @@ class AlienInvasion:
     def __init__(self):
         """Initialize the game and create game resources."""
         pygame.init()
-        # Start Alien Invasion in an inactive state. 
-        self.game_active = False
-        # Make play button.
-        self.play_button = Button(self, "Play")
+        self.clock = pygame.time.Clock()
         self.settings = Settings()
         self.screen = pygame.display.set_mode((
             self.settings.screen_width,
             self.settings.screen_height
         ))
+        self.screen_rect = self.screen.get_rect()
         pygame.display.set_caption("Alien Invasion")
-
+        
         # Create an instance to store game statistics
         #        create a scoreboard.
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
 
-        self.ship = Ship(ai_game=self)
         # Load background image
         bg_path = Path('Assets/images/background.png')
         self.background = pygame.image.load(bg_path)
@@ -53,6 +50,11 @@ class AlienInvasion:
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
+
+        # Start Alien Invasion in an inactive state. 
+        self.game_active = False
+         # Make play button.
+        self.play_button = Button(self, "Play")
         
     def run_game(self):
         """Start the main loop for the game."""
@@ -90,8 +92,7 @@ class AlienInvasion:
 
     def _check_play_button(self, mouse_pos):
         """Start a new game when the player clicks Play."""
-        if self.play_buttons.rect.collidepoint(mouse_pos):
-            button_clicked = self.play_buttons.rect.collidepoint(mouse_pos)
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.game_active:
             # Reset the game statistics.
             self.settings.initialize_dynamic_settings()
