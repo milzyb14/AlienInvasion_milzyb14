@@ -97,6 +97,7 @@ class AlienInvasion:
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.sb.prep_score()
+            self.sb.prep_level()
             self.game_active = True
             # Get rid of any remaining bullets and aliens.
             self.bullets.empty()
@@ -131,12 +132,17 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points
             self.sb.prep_score()
+            self.sb.check_high_score()
         # If all aliens gone, respwan the fleet. 
         if not self.aliens:
         # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+        # Increase level. 
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""
