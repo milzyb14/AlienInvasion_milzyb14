@@ -8,6 +8,7 @@ Date: 04/25/2026
 
 import pygame.font
 from pygame.sprite import Group
+from pathlib import Path
 
 from ship import Ship
 
@@ -24,7 +25,8 @@ class Scoreboard:
 
         # Font settings for scoring information.
         self.text_color = (30, 30, 30)
-        self.font = pygame.font.SysFont(None, 48)
+        font_path = Path('Assets/Fonts/VT323/VT323-Regular.ttf')
+        self.font = pygame.font.Font(font_path, 48)
 
         # Prepare the initial score images.
         self.prep_score()

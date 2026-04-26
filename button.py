@@ -1,4 +1,5 @@
 import pygame.font
+from pathlib import Path
 
 class Button:
     """A class to build buttons for the game."""
@@ -12,7 +13,8 @@ class Button:
         self.width, self.height = 200, 50 
         self.button_color = (0, 255, 0)
         self.text_color = (255, 255, 255)
-        self.font = pygame.font.SysFont(None, 48)
+        font_path = 'Assets/Fonts/VT323/VT323-Regular.ttf'
+        self.font = pygame.font.Font(font_path, 48)
 
         # Build the button's rect object and center it. 
         self.rect = pygame.Rect(0, 0, self.width, self.height)
