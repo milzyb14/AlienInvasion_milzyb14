@@ -3,17 +3,23 @@ Ship module for AlienInvasion_milzyb14.
 Author: Myles Buchanan
 Purpose: Manages the player's ship including movement and rendering.
 Starter code from: https://github.com/RedBeard41/alien_Invasion_starter.git
-Date: 04/12/2026
+Date: 04/26/2026
+
+Asset Attribution:
+- Ship image: from Kenney.nl Space Shooter Remastered Pack
+  https://kenney.nl/assets/space-shooter-remastered
 """
 
 import pygame
 from pathlib import Path
+from pygame.sprite import Sprite
 
-class Ship:
+class Ship(Sprite):
     """A class to manage the ship."""
 
     def __init__(self, ai_game):
         """Initialize the ship and set its starting position."""
+        super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
@@ -40,3 +46,8 @@ class Ship:
     def blitme(self):
         """Draw the ship at its current location."""
         self.screen.blit(self.image, self.rect)
+
+    def center_ship(self):
+        """Center the ship on the screen."""
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
