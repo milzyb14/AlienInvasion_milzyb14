@@ -8,7 +8,7 @@ Date: 04/26/2026
 
 Asset Attribution:
 - Font: VT323 by The VT323 Project Authors
-Source: https://fonts.google.come/specimen/VT323
+Source: https://fonts.google.com/specimen/VT323
 License: Open Font License (OFL)
 """
 import pygame.font
