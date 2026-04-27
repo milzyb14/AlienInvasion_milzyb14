@@ -3,6 +3,10 @@ Author: Myles Buchanan
 Purpose: Manages individual alien sprites using a custom alien image.
 Starter code from: https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: 04/19/2026
+
+Asset Attribution:
+- Alien image: from Kenney.nl Space Shooter Remastered Pack
+  https://kenney.nl/assets/space-shooter-remastered
 """
 
 

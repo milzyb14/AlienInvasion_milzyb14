@@ -4,6 +4,16 @@ Author: Myles Buchanan
 Purpose: Main game loop and initialization for Alien Invasion game.
 Starter code from: https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: 04/12/2026
+
+Asset Attribution:
+- Laser sound: "Short Laser Gun Shot" from Mixkit
+  https://mixkit.co/free-sound-effects/laser/
+- Impact sound: "Arcade Space Shooter Dead Notification" from Mixkit
+  https://mixkit.co/free-sound-effects/game/
+- Font: VT323 by Peter Hull (Google Fonts)
+  https://fonts.google.com/specimen/VT323
+- Background image: NASA Artemis II mission imagery
+  https://images.nasa.gov
 """
 
 import sys

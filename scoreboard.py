@@ -4,6 +4,10 @@ Author: Myles Buchanan
 Purpose: Manages the display of game statistics.
 Starter code from: https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: 04/25/2026
+
+Asset Attribution:
+- Font: VT323 by Peter Hull (Google Fonts)
+  https://fonts.google.com/specimen/VT323
 """
 
 import pygame.font
