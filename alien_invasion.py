@@ -158,7 +158,7 @@ class AlienInvasion:
             self.sb.prep_score()
             self.sb.check_high_score()
 
-        # If all aliens gone, respwan the fleet. 
+        # If all aliens gone, start a new level. 
         if not self.aliens:
         # Destroy existing bullets and create new fleet.
             self.bullets.empty()
