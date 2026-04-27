@@ -71,7 +71,7 @@ class AlienInvasion:
             Path('Assets/sound/mixkit-arcade-space-shooter-dead-notification-272.wav')
         )
         self.laser_sound.set_volume(0.3)
-        self.impact_sound.set_volume(0.5)
+        self.impact_sound.set_volume(0.2)
         # Load background music
         pygame.mixer.music.load(
             Path('Assets/sound/leberch-space-ambient-509783.mp3')
@@ -211,6 +211,19 @@ class AlienInvasion:
         else:
             self.game_active = False
             pygame.mouse.set_visible(True)
+            self._show_game_over()
+
+    def _show_game_over(self):
+        """Display a game over message."""
+        font_path = Path('Assets/Fonts/VT323/VT323-Regular.ttf')
+        game_over_font = pygame.font.Font(font_path, 120)
+        text = game_over_font.render("GAME OVER", True,(255, 0, 0))
+        text_rect = text.get_rect()
+        text_rect.center = self.screen_rect.center
+        self.screen.blit(text, text_rect)
+        pygame.display.flip()
+        sleep(1.5)
+        
 
     def _create_fleet(self):
         """Create a custom cross shaped fleet of aliens."""
