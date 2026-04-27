@@ -17,13 +17,7 @@ class GameStats:
         self.settings = ai_game.settings
         self.high_score_path = Path('Assets/file/high_score.txt')
         self.reset_stats()
-        # Load high score from file if it exits, otherwise set to 0
-        if self.high_score_path.exists():
-            with self.high_score_path.open('r') as f:
-                self.high_score = int(f.read())
-        else:
-            self.high_score = 0
-
+        self.high_score = self._load_high_score()  # Load high score from file
 
     def reset_stats(self):
         """Initialize statistics that can change during the game."""
