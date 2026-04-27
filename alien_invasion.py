@@ -13,7 +13,9 @@ Asset Attribution:
 - Font: VT323 by Peter Hull (Google Fonts)
   https://fonts.google.com/specimen/VT323
 - Background image: NASA Artemis II mission imagery
-  https://images.nasa.gov
+  https://images-assets.nasa.gov/image/art002e009301/art002e009301~medium.jpg
+- Background music: "Space Ambient" by Leberch
+  https://pixabay.com/music/ambient-space-ambient-509783/
 """
 
 import sys
@@ -70,6 +72,12 @@ class AlienInvasion:
         )
         self.laser_sound.set_volume(0.3)
         self.impact_sound.set_volume(0.5)
+        # Load background music
+        pygame.mixer.music.load(
+            Path('Assets/sound/leberch-space-ambient-509783.mp3')
+        )
+        pygame.mixer.music.set_volume(0.2)
+        pygame.mixer.music.play(-1)  # -1 means loop forever
 
         # Start Alien Invasion in an inactive state. 
         self.game_active = False
@@ -204,7 +212,6 @@ class AlienInvasion:
             self.game_active = False
             pygame.mouse.set_visible(True)
 
-
     def _create_fleet(self):
         """Create a custom cross shaped fleet of aliens."""
         center_x = self.settings.screen_width // 2
@@ -239,8 +246,6 @@ class AlienInvasion:
         if not self.game_active:
             self.play_button.draw_button()
         pygame.display.flip()
-
-    
 
 if __name__ == '__main__':
     ai = AlienInvasion()
