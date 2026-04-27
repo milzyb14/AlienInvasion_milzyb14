@@ -51,6 +51,16 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
 
+        # Load custom sound effects
+        self.laser_sound = pygame.mixer.Sound(
+            Path('Assets/sounds/mixkit-short-laser-gun-shot-1670.wav')
+        )
+        self.impact_sound = pygame.mixer.Sound(
+            Path('Assets/sounds/mixkit-arcade-space-shooter-explosion-1693.wav')
+        )
+        self.laser_sound.set_volume(0.3)
+        self.impact_sound.set_volume(0.5)
+
         # Start Alien Invasion in an inactive state. 
         self.game_active = False
          # Make play button.
@@ -115,6 +125,7 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+            self.laser_sound.play()
 
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets."""
@@ -133,8 +144,10 @@ class AlienInvasion:
         if collisions:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points
+            self.impact_sound.play()
             self.sb.prep_score()
             self.sb.check_high_score()
+
         # If all aliens gone, respwan the fleet. 
         if not self.aliens:
         # Destroy existing bullets and create new fleet.
