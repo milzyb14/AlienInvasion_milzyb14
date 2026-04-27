@@ -27,8 +27,6 @@ class Button:
         self.button_color = (20, 20, 60)
         self.border_color = (0, 255, 255)
         self.text_color = (255, 255, 255)
-        font_path = 'Assets/Fonts/VT323/VT323-Regular.ttf'
-        self.font = pygame.font.Font(font_path, 48)
 
         # Use custom VT323 font
         font_path = Path('Assets/Fonts/VT323/VT323-Regular.ttf')
