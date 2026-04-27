@@ -196,10 +196,12 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """Respond to the ship being hit by an alien."""
+        
+    # Decrement ships left.
+        self.stats.ships_left -= 1
+        self.sb.prep_ships()
+        
         if self.stats.ships_left > 0:
-        # Decrement ships left.
-            self.stats.ships_left -= 1
-            self.sb.prep_ships()
         # Get rid of any remaining aliens and bullets.
             self.aliens.empty()
             self.bullets.empty()
@@ -224,7 +226,6 @@ class AlienInvasion:
         pygame.display.flip()
         sleep(1.5)
         
-
     def _create_fleet(self):
         """Create a custom cross shaped fleet of aliens."""
         center_x = self.settings.screen_width // 2
