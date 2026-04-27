@@ -1,7 +1,7 @@
 """
-Bullet module for AlienInvasion_milzyb14.
+Button module for AlienInvasion_milzyb14.
 Author: Myles Buchanan
-Purpose: Manages the bullets fired from the ship using a custom laser image.
+Purpose: Manages the play button for the game.
 Starter code from: https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: 04/12/2026
 
