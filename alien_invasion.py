@@ -51,13 +51,17 @@ class AlienInvasion:
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
 
-        # Load background image
-        bg_path = Path('Assets/images/background.png')
-        self.background = pygame.image.load(bg_path)
-        self.background = pygame.transform.scale(
-            self.background,
-            (self.settings.screen_width, self.settings.screen_height)
-        )
+        # Load all background images for different levels.
+        self.backgrounds = []
+        bg_files = ['bg_level1.png', 'bg_level2.png', 'bg_level3.png', 'bg_level4.png', 
+                    'bg_level5.png', 'bg_level6.png']
+        for bg_file in bg_files:
+            bg = pygame.image.load(Path(f'Assets/images/{bg_file}'))
+            bg = pygame.transform.scale(
+                bg, (self.settings.screen_width, self.settings.screen_height)
+            )
+            self.backgrounds.append(bg)
+        self.background = self.backgrounds[0]  # Start with level 1 background
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
@@ -172,10 +176,9 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
-
-        # Increase level. 
-            self.stats.level += 1
+            self.stats.level += 1 # Increase level. 
             self.sb.prep_level()
+            self._update_background()
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""
@@ -200,7 +203,7 @@ class AlienInvasion:
     # Decrement ships left.
         self.stats.ships_left -= 1
         self.sb.prep_ships()
-        
+
         if self.stats.ships_left > 0:
         # Get rid of any remaining aliens and bullets.
             self.aliens.empty()
@@ -245,6 +248,12 @@ class AlienInvasion:
         """Create an alien and place it in the fleet."""
         new_alien = Alien(self, x, y)
         self.aliens.add(new_alien)
+    
+    def _update_background(self):
+        """Change the background based on current level."""
+        # Cycle through backgrounds every 2 levels.
+        bg_index = ((self.stats.level -1) // 2) % len(self.backgrounds)
+        self.background = self.backgrounds[bg_index]
 
     def _update_screen(self):
         """Update images on the screen and flip to the new screen."""
