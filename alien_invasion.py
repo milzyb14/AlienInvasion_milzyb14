@@ -56,7 +56,7 @@ class AlienInvasion:
             Path('Assets/sound/mixkit-short-laser-gun-shot-1670.wav')
         )
         self.impact_sound = pygame.mixer.Sound(
-            Path('Assets/sound/mixkit-arcade-space-shooter-explosion-1693.wav')
+            Path('Assets/sound/mixkit-arcade-space-shooter-dead-notification-272.wav')
         )
         self.laser_sound.set_volume(0.3)
         self.impact_sound.set_volume(0.5)
