@@ -197,9 +197,7 @@ class AlienInvasion:
         self.bullets.empty()
         # Create a new fleet and center the ship.
         self._create_fleet()
-        self.ship.rect.midbottom = self.screen.get_rect().midbottom
-        self.ship.x = float(self.ship.rect.x)
-        pygame.mouse.set_visible(True)
+        self.ship.center_ship()
         # Pasue.
         sleep(0.5)
     else:
