@@ -73,9 +73,8 @@ class Scoreboard:
         """Check to see if there's a new high score."""
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
+            self.stats._save_high_score()  # Save new high score to file
             self.prep_high_score()
-            self.prep_level()
-            self.prep_ships()
 
     def prep_level(self):
         """Turn the level into a rendered image."""
