@@ -3,7 +3,7 @@ Scoreboard module for AlienInvasion_milzyb14.
 Author: Myles Buchanan
 Purpose: Manages the display of game statistics.
 Starter code from: https://github.com/RedBeard41/alien_Invasion_starter.git
-Date: 04/25/2026
+Date: 04/26/2026
 
 Asset Attribution:
 - Font: VT323 by Peter Hull (Google Fonts)
